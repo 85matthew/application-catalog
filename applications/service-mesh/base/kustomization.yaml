@@ -4,5 +4,5 @@ kind: Kustomization
 resources:
   - namespaces/istio-namespaces.yaml
 #  - service-mesh-member-roll.yaml
-#  - servicemesh-control-plane.yaml
+  - servicemesh-control-plane.yaml
 
