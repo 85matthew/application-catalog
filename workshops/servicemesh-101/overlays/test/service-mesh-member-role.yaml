@@ -1,0 +1,14 @@
+apiVersion: maistra.io/v1
+kind: ServiceMeshMemberRoll
+metadata:
+  name: default
+  namespace: istio-system
+spec:
+  members:
+  - fierce-2
+  - fierce-2
+  - fierce-1
+  - fierce-2
+  - fierce-3
+  - anm-1
+  - anm-2
