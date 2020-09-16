@@ -3,8 +3,8 @@ kind: Group
 metadata:
   name: test-workshop
 users:
-- anm-1
-- anm-2
 - fierce-1
 - fierce-2
 - fierce-3
+- anm-1
+- anm-2
