@@ -102,8 +102,7 @@ apiVersion: user.openshift.io/v1
 kind: Group
 metadata:
   name: {workshopname}-workshop
-spec:
-  members:
+users:
 """
 
     sm_member_roll = f"""
@@ -164,36 +163,63 @@ def write_to_file(file_path, content):
     f.close()
 
 
-def add_user_to_manifest(username, manifest):
+def add_user_to_manifest(username, ypath, manifest):
     user_list = list()
 
     f =  open(f'{manifest}', "r")
     data = f.read()
     f.close()
     ydoc = yaml.load(data, Loader=yaml.FullLoader)
-    if ydoc['spec']["members"] != None:
-        user_list = list(ydoc['spec']["members"])
 
-    user_list.append(username)
-    ydoc['spec']["members"] = user_list
+    if len(ypath.split('.')) == 1:
+        var1 = ypath.split('.')[0]
+        if ydoc[var1] != None:
+            print(ydoc[var1])
+            user_list = list(ydoc[var1])
+        user_list.append(username)
+        ydoc[var1] = user_list
+
+    elif len(ypath.split('.')) == 2:
+        var1 = ypath.split('.')[0]
+        var2 = ypath.split('.')[1]
+        if ydoc[var1][var2] != None:
+            user_list = list(ydoc[var1][var2])
+        user_list.append(username)
+        ydoc[var1][var2] = user_list
+    else:
+        print("Support for paths deeper than 2 needs to be added to this script")
+        exit()
 
     f =  open(f'{manifest}', "w")
     f.write(yaml.dump(ydoc))
     f.close()
 
 
-def remove_user_from_manifest(username, manifest):
+def remove_user_from_manifest(username, ypath, manifest):
     user_list = list()
 
     f =  open(f'{manifest}', "r")
     data = f.read()
     f.close()
     ydoc = yaml.load(data, Loader=yaml.FullLoader)
-    if ydoc['spec']["members"] != None:
-        user_list = list(ydoc['spec']["members"])
 
-    user_list.remove(username)
-    ydoc['spec']["members"] = user_list
+    if len(ypath.split('.')) == 1:
+        var1 = ypath.split('.')[0]
+        if ydoc[var1] != None:
+            user_list = list(ydoc[var1])
+        user_list.remove(username)
+        ydoc[var1] = user_list
+
+    elif len(ypath.split('.')) == 2:
+        var1 = ypath.split('.')[0]
+        var2 = ypath.split('.')[1]
+        if ydoc[var1][var2] != None:
+            user_list = list(ydoc[var1][var2])
+        user_list.remove(username)
+        ydoc[var1][var2] = user_list
+    else:
+        print("Support for paths deeper than 2 needs to be added to this script")
+        exit()
 
     f =  open(f'{manifest}', "w")
     f.write(yaml.dump(ydoc))
@@ -590,8 +616,8 @@ spec:
 
 
 def add_user(workshopname, username):
-    add_user_to_manifest(username, WORKSHOP_GROUP_FILE_FULL_PATH)
-    add_user_to_manifest(username, SERVICE_MESH_MEMBER_ROLE_FILE_FULL_PATH)
+    add_user_to_manifest(username, "users", WORKSHOP_GROUP_FILE_FULL_PATH)
+    add_user_to_manifest(username, "spec.members", SERVICE_MESH_MEMBER_ROLE_FILE_FULL_PATH)
     create_user_project(workshopname, username)
     install_keycloak_operator(workshopname, username)
     create_user_ingress_gateway(workshopname, username)
@@ -600,8 +626,8 @@ def add_user(workshopname, username):
 
 
 def remove_user(workshopname, username):
-    remove_user_from_manifest(username, WORKSHOP_GROUP_FILE_FULL_PATH)
-    remove_user_from_manifest(username, SERVICE_MESH_MEMBER_ROLE_FILE_FULL_PATH)
+    remove_user_from_manifest(username, "users", WORKSHOP_GROUP_FILE_FULL_PATH)
+    remove_user_from_manifest(username, "spec.members", SERVICE_MESH_MEMBER_ROLE_FILE_FULL_PATH)
     remove_manifests(workshopname, username)
     for key, value in kustomize_files.items():
         edit_kustomize("remove", f'{username}.yaml', key)
