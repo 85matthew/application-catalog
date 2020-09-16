@@ -1,0 +1,10 @@
+
+apiVersion: project.openshift.io/v1
+kind: Project
+metadata:
+  annotations:
+    openshift.io/requester: test-fierce-2
+  name: test-fierce-2
+spec:
+  finalizers:
+  - kubernetes
