@@ -395,7 +395,7 @@ spec:
     spec:
       affinity:
         nodeAffinity:
-          preferredDuringSchedulingIgnoredDuringExecuion:
+          preferredDuringSchedulingIgnoredDuringExecution:
           - preference:
               matchExpressions:
               - key: beta.kubernetes.io/arch
@@ -417,7 +417,7 @@ spec:
                 values:
                 - s390x
             weight: 2
-          requiredDuringSchedulingIgnoredDuringExecuton:
+          requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
               - key: beta.kubernetes.io/arch
