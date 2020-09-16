@@ -7,3 +7,4 @@ resources:
 - fierce-3.yaml
 - anm-1.yaml
 - anm-2.yaml
+- git::https://github.com/redhat-canada-gitops/catalog/installplan-approver/base
