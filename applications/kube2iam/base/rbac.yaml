@@ -28,18 +28,3 @@ items:
       name: kube2iam
       apiGroup: rbac.authorization.k8s.io
 kind: List
----
-kind: SecurityContextConstraints
-apiVersion: v1
-metadata:
-  name: kube2iam
-allowPrivilegedContainer: true
-allowHostPorts: true
-allowHostNetwork: true
-runAsUser:
-  type: RunAsAny
-seLinuxContext:
-  type: MustRunAs
-users:
-  - system:serviceacount:kube-system:kube2iam
----
