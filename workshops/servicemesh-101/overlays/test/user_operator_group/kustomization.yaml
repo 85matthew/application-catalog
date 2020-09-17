@@ -4,6 +4,3 @@ kind: Kustomization
 resources:
 - anm-1.yaml
 - anm-2.yaml
-- fierce-1.yaml
-- fierce-2.yaml
-- fierce-3.yaml

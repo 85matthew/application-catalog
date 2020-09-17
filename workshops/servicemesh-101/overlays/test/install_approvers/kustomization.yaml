@@ -1,9 +1,6 @@
 
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-patchesStrategicMerge:
-- anm-1.yaml
-- anm-2.yaml
-- fierce-1.yaml
-- fierce-2.yaml
-- fierce-3.yaml
+resources:
+- anm-1
+- anm-2
