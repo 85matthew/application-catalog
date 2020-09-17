@@ -9,3 +9,4 @@ resources:
   - user_subscriptions
   - group.yaml
   - service-mesh-member-role.yaml
+  - install_approvers
