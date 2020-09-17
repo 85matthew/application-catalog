@@ -1,0 +1,32 @@
+- kind: Deployment
+  apiVersion: apps/v1beta1
+  metadata:
+    name: aws-service-operator
+    namespace: aws-service-operator
+  spec:
+    replicas: 1
+    template:
+      metadata:
+        annotations:
+          iam.amazonaws.com/role: aws-service-operator
+        labels:
+          app: aws-service-operator
+      spec:
+        serviceAccountName: aws-service-operator
+        containers:
+          - name: aws-service-operator
+            image: awsserviceoperator/aws-service-operator:v0.0.1-alpha4
+            imagePullPolicy: Always
+            command:
+              - /bin/sh
+            args:
+              - "-c"
+              - export http_proxy=${HOST_IP}:8181; /usr/local/bin/aws-service-operator server --cluster-name=<CLUSTER_NAME> --region=<REGION> --account-id=<ACCOUNT_ID> --k8s-namespace=<K8S_NAMESPACE>
+        env:
+          - name: HOST_IP
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.hostIP
+          - name: no_proxy
+            value: "*.amazonaws.com,<KUBE_API_IP>:443"
