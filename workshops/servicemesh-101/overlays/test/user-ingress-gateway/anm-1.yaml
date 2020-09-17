@@ -299,7 +299,6 @@ metadata:
 spec:
   port:
     targetPort: 8080
-  subdomain: ""
   to:
     kind: Service
     name: istio-demogateway-anm-1
