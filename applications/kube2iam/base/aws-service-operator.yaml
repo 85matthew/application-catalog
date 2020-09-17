@@ -5,6 +5,9 @@ metadata:
   namespace: aws-service-operator
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: aws-service-operator
   template:
     metadata:
       annotations:
