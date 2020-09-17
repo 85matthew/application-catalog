@@ -11,14 +11,13 @@ spec:
   template:
     metadata:
       annotations:
-        iam.amazonaws.com/role: aws-service-operator
+        iam.amazonaws.com/role: arn:aws:iam::605251984176:policy/aws-service-operator
       labels:
         app: aws-service-operator
     spec:
       serviceAccountName: aws-service-operator
       containers:
         - name: aws-service-operator
-
           image: awsserviceoperator/aws-service-operator:v0.0.1-alpha4
           imagePullPolicy: Always
           command:
