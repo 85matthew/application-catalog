@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - daemonset.yaml
   - rbac.yaml
+  - aws-service-operator.yaml
