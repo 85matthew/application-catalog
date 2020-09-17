@@ -1,4 +1,3 @@
-
 apiVersion: maistra.io/v1
 kind: ServiceMeshMemberRoll
 metadata:
@@ -6,3 +5,8 @@ metadata:
   namespace: istio-system
 spec:
   members:
+  - anm-1
+  - anm-2
+  - fierce-1
+  - fierce-2
+  - fierce-3
