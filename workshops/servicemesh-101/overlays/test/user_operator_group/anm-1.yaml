@@ -1,9 +1,0 @@
-
-apiVersion: operators.coreos.com/v1
-kind: OperatorGroup
-metadata:
-  name: test-anm-1
-  namespace: test-anm-1
-spec:
-  targetNamespaces:
-  - test-anm-1

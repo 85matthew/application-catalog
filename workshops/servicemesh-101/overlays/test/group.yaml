@@ -1,10 +1,6 @@
+
 apiVersion: user.openshift.io/v1
 kind: Group
 metadata:
   name: test-workshop
 users:
-- fierce-1
-- fierce-2
-- fierce-3
-- anm-1
-- anm-2
