@@ -16,7 +16,7 @@ spec:
       serviceAccountName: kube2iam
       hostNetwork: true
       nodeSelector:
-        role: app
+        node-role.kubernetes.io/worker: ""
       containers:
         - image: docker.io/jtblin/kube2iam:latest
           imagePullPolicy: Always
@@ -24,7 +24,6 @@ spec:
           args:
             - "--app-port=8181"
             - "--auto-discover-base-arn"
-            - "--iptables=true"
             - "--host-ip=$(HOST_IP)"
             - "--host-interface=tun0"
             - "--verbose"
