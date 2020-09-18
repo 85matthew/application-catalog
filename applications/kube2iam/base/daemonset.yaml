@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: kube2iam
-  namespace: kubes-ystem
+  namespace: kubes-system
   labels:
     app: kube2iam
 spec:
